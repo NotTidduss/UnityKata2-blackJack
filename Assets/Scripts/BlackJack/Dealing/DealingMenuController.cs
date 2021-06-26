@@ -31,9 +31,9 @@ public class DealingMenuController : MonoBehaviour
         new WaitForSeconds(1);
 
         if (PlayerPrefs.GetInt("Kata2_sum") == 21)
-            GameObject.Find("Master").GetComponent<MasterController>().changeGameState(GameState.FINISHING);
+            GameObject.Find("Master").GetComponent<BlackJack_Master>().changeGameState(BlackJack_GameState.FINISHING);
         else
-            GameObject.Find("Master").GetComponent<MasterController>().changeGameState(GameState.PLAYING);
+            GameObject.Find("Master").GetComponent<BlackJack_Master>().changeGameState(BlackJack_GameState.PLAYING);
     }
 
     private List<string> initializeDeck() {
@@ -111,7 +111,7 @@ public class DealingMenuController : MonoBehaviour
 
         string enemyCardValue = pickFirstCardFromDeck(deck);
         int actualEnemyCardValue = mapCardValue(enemyCardValue);
-        PlayerPrefs.SetInt("Kata2_sum_enemy", PlayerPrefs.GetInt("Kata2_sum_enemy") + actualEnemyCardValue);
+        PlayerPrefs.SetInt("blackJack_sum_enemy", PlayerPrefs.GetInt("blackJack_sum_enemy") + actualEnemyCardValue);
         dealCard(enemyCardValue, enemyCardArea);
         if (hideCard) Instantiate(cardOverlayPrefab, enemyCardArea.transform);
     }
@@ -125,7 +125,7 @@ public class DealingMenuController : MonoBehaviour
 
     private void dealCard(string value, GameObject area) {
         GameObject card = cardPrefab;
-        card.GetComponent<CardController>().updateCardValue(value);
+        card.GetComponent<BlackJack_Card>().updateCardValue(value);
         Instantiate(card, area.transform);
     }
 
@@ -144,8 +144,8 @@ public class DealingMenuController : MonoBehaviour
     public void hitCard(GameObject playerCardArea) {
         string playerCardValue = pickFirstCardFromDeck(deck);
         int actualPlayerCardValue = mapCardValue(playerCardValue);
-        PlayerPrefs.SetInt("Kata2_sum", PlayerPrefs.GetInt("Kata2_sum") + actualPlayerCardValue);
-        playerSumText.text = "Your Sum: " + PlayerPrefs.GetInt("Kata2_sum");
+        PlayerPrefs.SetInt("blackJack_sum_player", PlayerPrefs.GetInt("blackJack_sum_player") + actualPlayerCardValue);
+        playerSumText.text = "Your Sum: " + PlayerPrefs.GetInt("blackJack_sum_player");
         dealCard(playerCardValue, playerCardArea);
     }
 }

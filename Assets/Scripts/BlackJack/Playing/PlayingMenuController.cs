@@ -42,6 +42,6 @@ public class PlayingMenuController : MonoBehaviour
     }
 
     public void stand() {
-        GameObject.Find("Master").GetComponent<MasterController>().changeGameState(GameState.FINISHING);
+        GameObject.Find("Master").GetComponent<BlackJack_Master>().changeGameState(BlackJack_GameState.FINISHING);
     }
 }
