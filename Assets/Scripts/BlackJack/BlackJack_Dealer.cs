@@ -1,42 +1,50 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DealingMenuController : MonoBehaviour
+public class BlackJack_Dealer : MonoBehaviour
 {
-    public GameObject cardPrefab;
-    public GameObject cardOverlayPrefab;
-    public GameObject playerCard1Area;
-    public GameObject playerCard2Area;
-    public GameObject enemyCard1Area;
-    public GameObject enemyCard2Area;
-    public Text playerSumText;
+    [Header("Scene References")]
+    [SerializeField] private BlackJack_Master master;
+    [SerializeField] private BlackJack_UI ui;
+    [SerializeField] private GameObject playerCard1Area;
+    [SerializeField] private GameObject playerCard2Area;
+    [SerializeField] private GameObject enemyCard1Area;
+    [SerializeField] private GameObject enemyCard2Area;
+
+    [Header("Prefab References")]
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject cardOverlayPrefab;
 
     private List<string> deck = new List<string>();
-    // used for shuffling
-    private List<string> emptyDeck = new List<string>();
+    private List<string> helperDeck = new List<string>();
     private int actualCardValue;
 
-    public void deal() {
-        deck = initializeDeck();
-        emptyDeck.Clear();
+    public void deal() => StartCoroutine("Deal");
 
-        deck = shuffleDeck(deck, emptyDeck);
-        new WaitForSeconds(1);
+    private IEnumerator Deal() {
+        for (int i = 0; i < 1; i++) {
+            deck = resetDeck();
+            helperDeck.Clear();
 
-        dealCard(playerCard1Area, enemyCard1Area, true);
-        new WaitForSeconds(1);
+            deck = shuffleDeck(deck, helperDeck);
+            new WaitForSeconds(1);
 
-        dealCard(playerCard2Area, enemyCard2Area, false);
-        new WaitForSeconds(1);
+            dealCard(playerCard1Area, enemyCard1Area, true);
+            new WaitForSeconds(1);
 
-        if (PlayerPrefs.GetInt("Kata2_sum") == 21)
-            GameObject.Find("Master").GetComponent<BlackJack_Master>().changeGameState(BlackJack_GameState.FINISHING);
-        else
-            GameObject.Find("Master").GetComponent<BlackJack_Master>().changeGameState(BlackJack_GameState.PLAYING);
+            dealCard(playerCard2Area, enemyCard2Area, false);
+            new WaitForSeconds(1);
+
+            if (PlayerPrefs.GetInt("blackJack_sum_player") == 21) master.changeGameState(BlackJack_GameState.FINISHING);
+            else master.changeGameState(BlackJack_GameState.PLAYING);
+
+            yield return null;
+        }
     }
 
-    private List<string> initializeDeck() {
+    private List<string> resetDeck() {
         return new List<string>() {
             "Clubs Ace",
             "Clubs 2",
@@ -95,13 +103,12 @@ public class DealingMenuController : MonoBehaviour
 
     private List<string> shuffleDeck(List<string> freshDeck, List<string> shuffledDeck) {
         if (freshDeck.Count == 0) return shuffledDeck;
-        else {
-            int randomIndex = Random.Range(0, freshDeck.Count);
-            shuffledDeck.Add(freshDeck[randomIndex]);
-            freshDeck.RemoveAt(randomIndex);
 
-            return shuffleDeck(freshDeck, shuffledDeck);
-        } 
+        int randomIndex = Random.Range(0, freshDeck.Count);
+        shuffledDeck.Add(freshDeck[randomIndex]);
+        freshDeck.RemoveAt(randomIndex);
+
+        return shuffleDeck(freshDeck, shuffledDeck);
     }
     
     private void dealCard(GameObject playerCardArea, GameObject enemyCardArea, bool hideCard) {
@@ -113,6 +120,7 @@ public class DealingMenuController : MonoBehaviour
         int actualEnemyCardValue = mapCardValue(enemyCardValue);
         PlayerPrefs.SetInt("blackJack_sum_enemy", PlayerPrefs.GetInt("blackJack_sum_enemy") + actualEnemyCardValue);
         dealCard(enemyCardValue, enemyCardArea);
+
         if (hideCard) Instantiate(cardOverlayPrefab, enemyCardArea.transform);
     }
 
@@ -145,7 +153,7 @@ public class DealingMenuController : MonoBehaviour
         string playerCardValue = pickFirstCardFromDeck(deck);
         int actualPlayerCardValue = mapCardValue(playerCardValue);
         PlayerPrefs.SetInt("blackJack_sum_player", PlayerPrefs.GetInt("blackJack_sum_player") + actualPlayerCardValue);
-        playerSumText.text = "Your Sum: " + PlayerPrefs.GetInt("blackJack_sum_player");
+        ui.updateDealingPlayerSumText();
         dealCard(playerCardValue, playerCardArea);
     }
 }

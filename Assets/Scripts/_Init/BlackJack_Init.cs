@@ -8,16 +8,9 @@ public class BlackJack_Init : MonoBehaviour
         SceneManager.LoadScene("1_BlackJack");
     }
 
-    /// <summary>
-    /// Resets all non-permamant PlayerPrefs to their supposed start value
-    /// in order to avoid bugs.
-    /// </summary>
-    /// <param name="t"> the given UI Text reference </param>
-    /// <param name="s"> the given text that should be displayed </param>
     private void resetPlayerPrefs() {
         /** 
             permament PlayerPrefs
-            
             blackJack_chips: the current amount of chips available to the player
         **/
 
