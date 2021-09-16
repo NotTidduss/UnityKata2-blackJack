@@ -6,7 +6,6 @@ public class BlackJack_Master : MonoBehaviour
     [SerializeField] private BlackJack_UI ui;
     [SerializeField] private BlackJack_Dealer dealer;
 
-    private int chips;
     private BlackJack_MatchResult matchResult;
 
 
@@ -32,7 +31,7 @@ public class BlackJack_Master : MonoBehaviour
                 matchResult = getMatchResult(PlayerPrefs.GetInt("blackJack_sum_enemy"), PlayerPrefs.GetInt("blackJack_sum_player"));
                 updateChips(matchResult, PlayerPrefs.GetInt("blackJack_chips"), PlayerPrefs.GetInt("blackJack_bet"));
                 ui.setFinishTexts(matchResult);
-                resetMatchStats();
+                resetMatchPlayerPrefs();
                 break;
         }
 
@@ -68,7 +67,7 @@ public class BlackJack_Master : MonoBehaviour
         }
     }
 
-    private void resetMatchStats() {
+    private void resetMatchPlayerPrefs() {
         PlayerPrefs.SetInt("blackJack_sum_enemy", 0);
         PlayerPrefs.SetInt("blackJack_sum_player", 0);
         PlayerPrefs.SetInt("blackJack_bet", 0);

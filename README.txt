@@ -1,28 +1,16 @@
-Unity Kata #2 - Black Jack
+Black Jack
 
-Functionality checklist:
-*) read 52 cards
-*) card shuffle
-*) betting system
-	*) money variable
-	*) selection of betting options
-*) receive cards
-	*) round 1: face down
-	*) round 2: face up
-*) HIT system (count management)
-	*) functionality for a natural = ace + 10
-	*) functionality for normal counting
-	*) functionality for a bust = value > 21 = loss
-*) STAND sytem
-	*) end round, reveal winner
+A quick prototype of the card game "Black Jack".
 
-Flow:
-1) hit start (start with fixed amount of chips = 100)
-2) select bet 	-> betting state
-3) card dealing -> dealing state
-4) hit or stand -> playing state
-5) reveal 		-> finish state
+Current features:
+ * Basic UI
+ * Betting
+ * Hit & Stand
+ * Result overview
 
-Goal for this kata:
-*) make a natural happen
-*) being able to actually win a round
+ToDo:
+- extract scenemanagement from ui into system
+- implement Deck class and extract relevant dealer methods
+- implement timed dealing for dealer when hitting 
+- improve ui card area handling to be list based
+- change List of string to List of Card

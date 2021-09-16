@@ -22,7 +22,7 @@ public class BlackJack_UI : MonoBehaviour
     [SerializeField] private Text playerSumText;
     [SerializeField] private Text resultText;
 
-    [Header("Custom UI References")]
+    [Header("Custom UI Object References")]
     [SerializeField] private GameObject playerCardArea1;
     [SerializeField] private GameObject playerCardArea2;
     [SerializeField] private GameObject playerCardArea3;

@@ -1,4 +1,6 @@
-public class BlackJack_Infrastructure{}
+using UnityEngine;
+
+public class BlackJack_System : MonoBehaviour {}
 
 public enum BlackJack_GameState {
     BETTING,

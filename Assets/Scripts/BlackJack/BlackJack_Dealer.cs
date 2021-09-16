@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BlackJack_Dealer : MonoBehaviour
 {
@@ -24,24 +23,22 @@ public class BlackJack_Dealer : MonoBehaviour
     public void deal() => StartCoroutine("Deal");
 
     private IEnumerator Deal() {
-        for (int i = 0; i < 1; i++) {
-            deck = resetDeck();
-            helperDeck.Clear();
+        for (int i = 0; i < 4; i++) {
+            switch (i) {
+                case 0: prepareDeck(); break;
+                case 1: dealCard(playerCard1Area, enemyCard1Area, true); break;
+                case 2: dealCard(playerCard2Area, enemyCard2Area, false); break;
+                case 3: checkForNatural(); break;
+            } 
 
-            deck = shuffleDeck(deck, helperDeck);
-            new WaitForSeconds(1);
-
-            dealCard(playerCard1Area, enemyCard1Area, true);
-            new WaitForSeconds(1);
-
-            dealCard(playerCard2Area, enemyCard2Area, false);
-            new WaitForSeconds(1);
-
-            if (PlayerPrefs.GetInt("blackJack_sum_player") == 21) master.changeGameState(BlackJack_GameState.FINISHING);
-            else master.changeGameState(BlackJack_GameState.PLAYING);
-
-            yield return null;
+            yield return new WaitForSeconds(1);
         }
+    }
+
+    private void prepareDeck() {
+        deck = resetDeck();
+        helperDeck.Clear();
+        deck = shuffleDeck(deck, helperDeck);
     }
 
     private List<string> resetDeck() {
@@ -133,7 +130,7 @@ public class BlackJack_Dealer : MonoBehaviour
 
     private void dealCard(string value, GameObject area) {
         GameObject card = cardPrefab;
-        card.GetComponent<BlackJack_Card>().updateCardValue(value);
+        card.GetComponent<BlackJack_Card>().setCardValue(value);
         Instantiate(card, area.transform);
     }
 
@@ -147,6 +144,11 @@ public class BlackJack_Dealer : MonoBehaviour
             default:
                 return int.Parse(splitValue);
         }
+    }
+
+    private void checkForNatural() {
+        if (PlayerPrefs.GetInt("blackJack_sum_player") == 21) master.changeGameState(BlackJack_GameState.FINISHING);
+        else master.changeGameState(BlackJack_GameState.PLAYING);
     }
 
     public void hitCard(GameObject playerCardArea) {
