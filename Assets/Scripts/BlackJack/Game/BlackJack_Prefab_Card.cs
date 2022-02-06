@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlackJack_Card : MonoBehaviour
+public class BlackJack_Prefab_Card : MonoBehaviour
 {
     public Text cardValue;
 

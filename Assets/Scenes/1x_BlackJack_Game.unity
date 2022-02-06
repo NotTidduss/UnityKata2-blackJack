@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974446a843589f94fbcc0ae428ec9f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sys: {fileID: 1062299221}
   ui: {fileID: 1084527242}
   dealer: {fileID: 2039496713}
 --- !u!4 &70267350
@@ -2246,6 +2247,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799116373}
   m_CullTransparentMesh: 1
+--- !u!1 &809428688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809428690}
+  - component: {fileID: 809428689}
+  m_Layer: 0
+  m_Name: DealerDeck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &809428689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809428688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8471bb7567c9da448746bdf86478510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &809428690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809428688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2039496712}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &823253378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,6 +3041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ee3b799a3473148bb43c828b9131a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackJackGameSceneName: 1x_BlackJack_Game
 --- !u!1 &1084527240
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,8 +3086,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84082076b0ac334baf17b0f28f6b51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  master: {fileID: 70267349}
-  dealer: {fileID: 2039496713}
   bettingMenu: {fileID: 1830203844}
   dealingMenu: {fileID: 1471488796}
   playingMenu: {fileID: 824066860}
@@ -5256,7 +5299,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 809428690}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5272,8 +5316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8de0734a5886146a73fb6529ab8156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  master: {fileID: 70267349}
-  ui: {fileID: 1084527242}
+  dealerDeck: {fileID: 809428689}
   playerCard1Area: {fileID: 1505932117}
   playerCard2Area: {fileID: 957837759}
   enemyCard1Area: {fileID: 1428864197}

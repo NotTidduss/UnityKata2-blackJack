@@ -1,18 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class BlackJack_UI : MonoBehaviour
 {
-    [Header("Scene References")]
-    [SerializeField] private BlackJack_Master master;
-    [SerializeField] private BlackJack_Dealer dealer;
-
     [Header("Menu References")]
     [SerializeField] private GameObject bettingMenu;
     [SerializeField] private GameObject dealingMenu;
     [SerializeField] private GameObject playingMenu;
     [SerializeField] private GameObject finishingMenu;
+
 
     [Header("Text References")]
     [SerializeField] private Text dealingPlayerSumText;
@@ -21,6 +17,7 @@ public class BlackJack_UI : MonoBehaviour
     [SerializeField] private Text enemySumText;
     [SerializeField] private Text playerSumText;
     [SerializeField] private Text resultText;
+
 
     [Header("Custom UI Object References")]
     [SerializeField] private GameObject playerCardArea1;
@@ -34,12 +31,20 @@ public class BlackJack_UI : MonoBehaviour
     [SerializeField] private GameObject playerCardArea9;
     [SerializeField] private GameObject opponentCardArea1;
     [SerializeField] private GameObject opponentCardArea2;
+
+
+    //* private vars
+    private BlackJack_Master master;
     private int currentCardIndexAfterDealing = 3;
 
 
-    public void initialize() => updateChipsText();
+    public void initialize(BlackJack_Master masterRef) {
+        master = masterRef;
 
-    #region Menus
+        updateChipsText();
+    }
+
+#region Menus
     public void disableAllMenus() {
         bettingMenu.SetActive(false);
         dealingMenu.SetActive(false);
@@ -55,9 +60,9 @@ public class BlackJack_UI : MonoBehaviour
             case BlackJack_GameState.FINISHING: finishingMenu.SetActive(true); return;
         }
     }
-    #endregion
+#endregion
 
-    #region Texts
+#region Texts
     private void setText(Text t, string s) => t.text = s;
     
     /*
@@ -76,13 +81,15 @@ public class BlackJack_UI : MonoBehaviour
             case BlackJack_MatchResult.DRAW: setText(resultText, "DRAW"); return;
         }
     }
-    public void updateDealingPlayerSumText() => setText(dealingPlayerSumText, "Your Sum: " + PlayerPrefs.GetInt("blackJack_sum_player"));
-    private void updateEnemySumText() => setText(enemySumText, "Enemy Sum: " + PlayerPrefs.GetInt("blackJack_sum_enemy"));
-    private void updatePlayerSumText() => setText(playerSumText, "Your Sum: " + PlayerPrefs.GetInt("blackJack_sum_player"));
+    public void updateDealingPlayerSumText() {
+        setText(dealingPlayerSumText, "Your Sum: " + PlayerPrefs.GetInt("blackJack_playerSum"));    
+    }
+    private void updateEnemySumText() => setText(enemySumText, "Enemy Sum: " + PlayerPrefs.GetInt("blackJack_enemySum"));
+    private void updatePlayerSumText() => setText(playerSumText, "Your Sum: " + PlayerPrefs.GetInt("blackJack_playerSum"));
     private void updateChipsText() => setText(chipsText, "Chips: " + PlayerPrefs.GetInt("blackJack_chips"));
-    #endregion
+#endregion
 
-    #region Buttons
+#region Buttons
     /*
         If current amount of chips is greater than [bet], set bet and progress the game.
         @param bet: the given bet </param>
@@ -95,7 +102,7 @@ public class BlackJack_UI : MonoBehaviour
         }
     } 
     public void setBetAllIn() => setBet(PlayerPrefs.GetInt("blackJack_chips"));
-    public void playAgain() => SceneManager.LoadScene("1_BlackJack");
+    public void playAgain() => master.sys.loadGameScene();
     
     /*
         Tell the dealer to add another card to the player's pile.
@@ -103,8 +110,10 @@ public class BlackJack_UI : MonoBehaviour
     public void hit() {
         GameObject playerCardArea = getPlayerCardAreaById(currentCardIndexAfterDealing);
         currentCardIndexAfterDealing++;
-        dealer.hitCard(playerCardArea);
-        if (PlayerPrefs.GetInt("blackJack_sum_player") > 20) stand();
+
+        master.dealer.hit(playerCardArea);
+
+        if (PlayerPrefs.GetInt("blackJack_playerSum") > 20) stand();
     }
 
     private GameObject getPlayerCardAreaById(int index) {
@@ -122,5 +131,5 @@ public class BlackJack_UI : MonoBehaviour
     }
 
     public void stand() => master.changeGameState(BlackJack_GameState.FINISHING);
-    #endregion
+#endregion
 }

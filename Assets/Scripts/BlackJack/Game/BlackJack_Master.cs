@@ -3,17 +3,22 @@ using UnityEngine;
 public class BlackJack_Master : MonoBehaviour
 {
     [Header("Scene References")]
-    [SerializeField] private BlackJack_UI ui;
-    [SerializeField] private BlackJack_Dealer dealer;
+    public BlackJack_System sys;
+    public BlackJack_UI ui;
+    public BlackJack_Dealer dealer;
 
+    //* private vars
     private BlackJack_MatchResult matchResult;
 
 
     void Start() {
-        if (PlayerPrefs.GetInt("blackJack_chips") == 0) PlayerPrefs.SetInt("blackJack_chips", 100);
-        ui.initialize();
+        BlackJack_PlayerPrefsMaster.initializePlayerPrefs();
+        ui.initialize(this);
+        dealer.initialize(this);
+
         changeGameState(BlackJack_GameState.BETTING);
     }
+
 
     public void changeGameState(BlackJack_GameState newState) {
         switch (newState) {
@@ -28,7 +33,7 @@ public class BlackJack_Master : MonoBehaviour
                 break;
             case BlackJack_GameState.FINISHING:
                 ui.disableAllMenus();
-                matchResult = getMatchResult(PlayerPrefs.GetInt("blackJack_sum_enemy"), PlayerPrefs.GetInt("blackJack_sum_player"));
+                matchResult = getMatchResult(PlayerPrefs.GetInt("blackJack_enemySum"), PlayerPrefs.GetInt("blackJack_playerSum"));
                 updateChips(matchResult, PlayerPrefs.GetInt("blackJack_chips"), PlayerPrefs.GetInt("blackJack_bet"));
                 ui.setFinishTexts(matchResult);
                 resetMatchPlayerPrefs();
@@ -68,8 +73,8 @@ public class BlackJack_Master : MonoBehaviour
     }
 
     private void resetMatchPlayerPrefs() {
-        PlayerPrefs.SetInt("blackJack_sum_enemy", 0);
-        PlayerPrefs.SetInt("blackJack_sum_player", 0);
+        PlayerPrefs.SetInt("blackJack_enemySum", 0);
+        PlayerPrefs.SetInt("blackJack_playerSum", 0);
         PlayerPrefs.SetInt("blackJack_bet", 0);
     }
 }
