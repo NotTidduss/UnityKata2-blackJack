@@ -10,7 +10,7 @@ public class BlackJack_DealerDeck : MonoBehaviour
     private int shufflePower;
 
 
-    public void initialize()
+    public void Initialize()
     {
         resetDeck();
         shufflePower = cards.Count * BlackJack_System.shuffleAmplifier;

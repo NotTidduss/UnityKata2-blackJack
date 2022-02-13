@@ -7,14 +7,16 @@ public class BlackJack_Master : MonoBehaviour
     public BlackJack_UI ui;
     public BlackJack_Dealer dealer;
 
+
     //* private vars
     private BlackJack_MatchResult matchResult;
 
 
-    void Start() {
+    void Start() 
+    {
         BlackJack_PlayerPrefsMaster.initializePlayerPrefs();
-        ui.initialize(this);
-        dealer.initialize(this);
+        ui.Initialize(this);
+        dealer.Initialize(this);
 
         changeGameState(BlackJack_GameState.BETTING);
     }
@@ -35,8 +37,7 @@ public class BlackJack_Master : MonoBehaviour
                 ui.disableAllMenus();
                 matchResult = getMatchResult(PlayerPrefs.GetInt("blackJack_enemySum"), PlayerPrefs.GetInt("blackJack_playerSum"));
                 updateChips(matchResult, PlayerPrefs.GetInt("blackJack_chips"), PlayerPrefs.GetInt("blackJack_bet"));
-                ui.setFinishTexts(matchResult);
-                resetMatchPlayerPrefs();
+                ui.setFinishingMenuTexts(matchResult);
                 break;
         }
 
@@ -70,11 +71,5 @@ public class BlackJack_Master : MonoBehaviour
             case BlackJack_MatchResult.BUST: case BlackJack_MatchResult.LOSE: PlayerPrefs.SetInt("blackJack_chips", chips - bet); return;
             case BlackJack_MatchResult.NATURAL: case BlackJack_MatchResult.WIN: PlayerPrefs.SetInt("blackJack_chips", chips + bet); return;
         }
-    }
-
-    private void resetMatchPlayerPrefs() {
-        PlayerPrefs.SetInt("blackJack_enemySum", 0);
-        PlayerPrefs.SetInt("blackJack_playerSum", 0);
-        PlayerPrefs.SetInt("blackJack_bet", 0);
     }
 }

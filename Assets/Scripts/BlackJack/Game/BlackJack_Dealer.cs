@@ -24,7 +24,7 @@ public class BlackJack_Dealer : MonoBehaviour
     private int actualCardValue;
 
 
-    public void initialize(BlackJack_Master masterRef)
+    public void Initialize(BlackJack_Master masterRef)
     {
         master = masterRef;
 
@@ -33,7 +33,7 @@ public class BlackJack_Dealer : MonoBehaviour
         enemyCards = new List<BlackJack_Card>();
 
         // prepare and shuffle deck 
-        dealerDeck.initialize();
+        dealerDeck.Initialize();
     }
 
 
@@ -62,7 +62,7 @@ public class BlackJack_Dealer : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        master.ui.updateDealingPlayerSumText();
+        master.ui.refreshDealingMenu();
         placeCard(pickedPlayerCard.cardName, playerCardArea);
     }
 

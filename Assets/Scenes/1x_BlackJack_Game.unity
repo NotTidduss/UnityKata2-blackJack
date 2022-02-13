@@ -406,9 +406,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -539,9 +539,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: hit
+      - m_Target: {fileID: 824066862}
+        m_TargetAssemblyTypeName: BlackJack_PlayingMenu, Assembly-CSharp
+        m_MethodName: OnClick_Hit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -775,7 +775,6 @@ RectTransform:
   m_Children:
   - {fileID: 1830203845}
   - {fileID: 1471488797}
-  - {fileID: 824066861}
   - {fileID: 681430344}
   - {fileID: 1766371127}
   - {fileID: 2090154547}
@@ -1648,9 +1647,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1707,6 +1706,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 681430344}
+  - component: {fileID: 681430345}
   m_Layer: 5
   m_Name: FinishingMenu
   m_TagString: Untagged
@@ -1731,13 +1731,28 @@ RectTransform:
   - {fileID: 987379528}
   - {fileID: 1622963541}
   m_Father: {fileID: 233961497}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &681430345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 681430343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b0d6a2455da834daaf259681831749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySumText: {fileID: 1879430035}
+  playerSumText: {fileID: 1774842980}
+  resultText: {fileID: 987379529}
 --- !u!1 &685332314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,9 +1836,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBetAllIn
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBetAllIn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1954,9 +1969,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2374,6 +2389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 824066861}
+  - component: {fileID: 824066862}
   m_Layer: 5
   m_Name: PlayingMenu
   m_TagString: Untagged
@@ -2388,14 +2404,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824066860}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1721293240}
   - {fileID: 122496538}
   - {fileID: 1212432536}
-  m_Father: {fileID: 233961497}
+  m_Father: {fileID: 1471488797}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2403,6 +2419,18 @@ RectTransform:
   m_AnchoredPosition: {x: 80, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &824066862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824066860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce1168a5d3d2b046bd7412911d1e4b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &849979586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2561,9 +2589,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3086,27 +3114,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84082076b0ac334baf17b0f28f6b51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bettingMenu: {fileID: 1830203844}
-  dealingMenu: {fileID: 1471488796}
-  playingMenu: {fileID: 824066860}
-  finishingMenu: {fileID: 681430343}
-  dealingPlayerSumText: {fileID: 405974489}
-  chipsText: {fileID: 1766371128}
+  bettingMenu: {fileID: 1830203846}
+  dealingMenu: {fileID: 1471488798}
+  finishingMenu: {fileID: 681430345}
   betText: {fileID: 2090154549}
-  enemySumText: {fileID: 1879430035}
-  playerSumText: {fileID: 1774842980}
-  resultText: {fileID: 987379529}
-  playerCardArea1: {fileID: 1505932117}
-  playerCardArea2: {fileID: 957837759}
-  playerCardArea3: {fileID: 179425726}
-  playerCardArea4: {fileID: 982345227}
-  playerCardArea5: {fileID: 949896956}
-  playerCardArea6: {fileID: 474096179}
-  playerCardArea7: {fileID: 98092714}
-  playerCardArea8: {fileID: 2144336887}
-  playerCardArea9: {fileID: 1360504925}
-  opponentCardArea1: {fileID: 1428864197}
-  opponentCardArea2: {fileID: 1360248771}
+  chipsText: {fileID: 1766371128}
 --- !u!1 &1103378826
 GameObject:
   m_ObjectHideFlags: 0
@@ -3269,9 +3281,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3402,9 +3414,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: stand
+      - m_Target: {fileID: 824066862}
+        m_TargetAssemblyTypeName: BlackJack_PlayingMenu, Assembly-CSharp
+        m_MethodName: OnClick_Stand
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3760,9 +3772,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3893,9 +3905,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4106,6 +4118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1471488797}
+  - component: {fileID: 1471488798}
   m_Layer: 5
   m_Name: DealingMenu
   m_TagString: Untagged
@@ -4126,6 +4139,7 @@ RectTransform:
   m_Children:
   - {fileID: 517239303}
   - {fileID: 245025458}
+  - {fileID: 824066861}
   m_Father: {fileID: 233961497}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4134,6 +4148,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1471488798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471488796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9322ba09a81f8458bc6b3bdbc96b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playingMenu: {fileID: 824066862}
+  playerSumText: {fileID: 405974489}
+  playerCardArea1: {fileID: 1505932117}
+  playerCardArea2: {fileID: 957837759}
+  playerCardArea3: {fileID: 179425726}
+  playerCardArea4: {fileID: 982345227}
+  playerCardArea5: {fileID: 949896956}
+  playerCardArea6: {fileID: 474096179}
+  playerCardArea7: {fileID: 98092714}
+  playerCardArea8: {fileID: 2144336887}
+  playerCardArea9: {fileID: 1360504925}
+  opponentCardArea1: {fileID: 1428864197}
+  opponentCardArea2: {fileID: 1360248771}
 --- !u!1 &1505932117
 GameObject:
   m_ObjectHideFlags: 0
@@ -4292,9 +4331,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: playAgain
+      - m_Target: {fileID: 681430345}
+        m_TargetAssemblyTypeName: BlackJack_FinishingMenu, Assembly-CSharp
+        m_MethodName: OnClick_PlayAgain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4660,9 +4699,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4740,7 +4779,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 233961497}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4877,6 +4916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1830203845}
+  - component: {fileID: 1830203846}
   m_Layer: 5
   m_Name: BettingMenu
   m_TagString: Untagged
@@ -4915,6 +4955,18 @@ RectTransform:
   m_AnchoredPosition: {x: 239, y: 76}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1830203846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830203844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0963aaa176b1174a84b1feae5d7d3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1879430033
 GameObject:
   m_ObjectHideFlags: 0
@@ -5077,9 +5129,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084527242}
-        m_TargetAssemblyTypeName: BlackJack_UI, Assembly-CSharp
-        m_MethodName: setBet
+      - m_Target: {fileID: 1830203846}
+        m_TargetAssemblyTypeName: BlackJack_BettingMenu, Assembly-CSharp
+        m_MethodName: OnClick_SetBet
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5432,7 +5484,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 233961497}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
