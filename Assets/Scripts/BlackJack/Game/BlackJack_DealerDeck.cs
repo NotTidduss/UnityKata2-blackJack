@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BlackJack_DealerDeck : MonoBehaviour
 {
-    public List<string> cards { get; private set; }
+    public List<BlackJack_Card> cards { get; private set; }
 
 
     //* private vars
@@ -19,9 +19,9 @@ public class BlackJack_DealerDeck : MonoBehaviour
 
 
     // picks card at index 0, puts it at the end of the deck and returns it
-    public string pickFirst()
+    public BlackJack_Card pickFirst()
     {
-        string card = cards[0];
+        BlackJack_Card card = cards[0];
         cards.RemoveAt(0);
         cards.Add(card);
 
@@ -36,7 +36,7 @@ public class BlackJack_DealerDeck : MonoBehaviour
         for (int i = 0; i < shufflePower; i++)
         {
             int rng = Random.Range(0, cards.Count);
-            string card = cards[rng];
+            BlackJack_Card card = cards[rng];
             cards.RemoveAt(rng);
 
             rng = Random.Range(0, cards.Count);

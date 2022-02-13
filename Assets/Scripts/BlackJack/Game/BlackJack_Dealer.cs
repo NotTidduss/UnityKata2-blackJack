@@ -19,12 +19,18 @@ public class BlackJack_Dealer : MonoBehaviour
 
     //* private vars
     private BlackJack_Master master;
+    private List<BlackJack_Card> playerCards;
+    private List<BlackJack_Card> enemyCards;
     private int actualCardValue;
 
 
     public void initialize(BlackJack_Master masterRef)
     {
         master = masterRef;
+
+        // prepare card lists
+        playerCards = new List<BlackJack_Card>();
+        enemyCards = new List<BlackJack_Card>();
 
         // prepare and shuffle deck 
         dealerDeck.initialize();
@@ -47,29 +53,29 @@ public class BlackJack_Dealer : MonoBehaviour
         }
     }
 
-    // Pick first card from deck, calcalute new Player score, and deal the card
+    // Pick first card from deck, calcalute new Player score, wait a second, and place the card on the table
     IEnumerator DealCardForPlayer(GameObject playerCardArea)
     {
-        string playerCardValue = dealerDeck.pickFirst();
-        int actualPlayerCardValue = mapCardValue(playerCardValue);
-        PlayerPrefs.SetInt("blackJack_playerSum", PlayerPrefs.GetInt("blackJack_playerSum") + actualPlayerCardValue);
+        BlackJack_Card pickedPlayerCard = dealerDeck.pickFirst();
+        playerCards.Add(pickedPlayerCard);
+        PlayerPrefs.SetInt("blackJack_playerSum", calculateCardSum(playerCards));
 
         yield return new WaitForSeconds(1f);
 
         master.ui.updateDealingPlayerSumText();
-        placeCard(playerCardValue, playerCardArea);
+        placeCard(pickedPlayerCard.cardName, playerCardArea);
     }
 
     // Pick first card from deck, calcalute new Enemy score, and deal the card. Use overlay for first card.
     IEnumerator DealCardForEnemy(GameObject enemyCardArea, bool useOverlay)
     {
-        string enemyCardValue = dealerDeck.pickFirst();
-        int actualEnemyCardValue = mapCardValue(enemyCardValue);
-        PlayerPrefs.SetInt("blackJack_enemySum", PlayerPrefs.GetInt("blackJack_enemySum") + actualEnemyCardValue);
+        BlackJack_Card pickedEnemyCard = dealerDeck.pickFirst();
+        enemyCards.Add(pickedEnemyCard);
+        PlayerPrefs.SetInt("blackJack_enemySum", calculateCardSum(enemyCards));
 
         yield return new WaitForSeconds(1f);
 
-        placeCard(enemyCardValue, enemyCardArea);
+        placeCard(pickedEnemyCard.cardName, enemyCardArea);
         if (useOverlay) Instantiate(cardOverlayPrefab, enemyCardArea.transform);
     }
 
@@ -90,13 +96,28 @@ public class BlackJack_Dealer : MonoBehaviour
         Instantiate(card, area.transform);
     }
 
-    private int mapCardValue(string value)
+    private int calculateCardSum(List<BlackJack_Card> cards) 
     {
-        string splitValue = value.Split(' ')[1];
+        int newSum = 0;
+        cards.ForEach( card => 
+        {
+            // if sum gets too high, the ace value changes.
+            if (newSum < 11)
+                newSum += mapCardValue(card.cardName, 11);
+            else
+                newSum += mapCardValue(card.cardName, 1);
+        });
+
+        return newSum;
+    }
+
+    private int mapCardValue(string cardName, int aceValue)
+    {
+        string splitValue = cardName.Split(' ')[1];
         switch (splitValue)
         {
             case "Ace":
-                return 11;
+                return aceValue;
             case "10":
             case "Jack":
             case "Queen":
